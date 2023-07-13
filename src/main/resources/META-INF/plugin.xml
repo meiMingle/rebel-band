@@ -1,18 +1,7 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.meimingle.rebelband</id>
-    <name>rebel-band Template</name>
-    <vendor>meimingle</vendor>
-
-    <depends>com.intellij.modules.platform</depends>
-
-    <resource-bundle>messages.MyBundle</resource-bundle>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.meimingle.rebelband.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-    </extensions>
-
-    <applicationListeners>
-        <listener class="com.github.meimingle.rebelband.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-    </applicationListeners>
+    <name>Rebel-Band</name>
+    <vendor url="https://github.com/meiMingle">meiMingle</vendor>
+    <depends optional="true" config-file="JrebelPlugin.xml">JRebelPlugin</depends>
 </idea-plugin>

@@ -18,7 +18,13 @@ version = properties("pluginVersion").get()
 
 // Configure project's dependencies
 repositories {
+    mavenLocal()
+    // maven { url = uri("https://maven.aliyun.com/repository/public/") }
     mavenCentral()
+    maven { url = uri("https://plugins.gradle.org/m2/") }
+    maven { url = uri("https://oss.sonatype.org/content/groups/public") }
+    maven { url = uri("https://www.jetbrains.com/intellij-repository/releases") }
+    maven { url = uri("https://cache-redirector.jetbrains.com/intellij-dependencies") }
 }
 
 // Dependencies are managed with Gradle version catalog - read more: https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog
@@ -67,6 +73,10 @@ koverReport {
 tasks {
     wrapper {
         gradleVersion = properties("gradleVersion").get()
+    }
+
+    buildSearchableOptions{
+        enabled = false
     }
 
     patchPluginXml {
@@ -123,5 +133,13 @@ tasks {
         // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
         // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
         channels = properties("pluginVersion").map { listOf(it.split('-').getOrElse(1) { "default" }.split('.').first()) }
+    }
+
+    runIde {
+        systemProperties["idea.is.internal"] = true
+        jvmArgs = listOf(
+            "-javaagent:D:/dev_soft/ja-netfilter/ja-netfilter.jar",
+            "--add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED",
+            "--add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED")
     }
 }
