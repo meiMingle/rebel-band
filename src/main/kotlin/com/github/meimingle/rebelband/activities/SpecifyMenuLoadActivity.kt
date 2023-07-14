@@ -6,11 +6,11 @@ import com.intellij.openapi.actionSystem.Constraints
 import com.intellij.openapi.actionSystem.DefaultActionGroup
 import com.intellij.openapi.actionSystem.impl.ActionManagerImpl
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.startup.ProjectActivity
+import com.intellij.openapi.startup.StartupActivity
 import com.intellij.ui.ExperimentalUI
 
-internal class SpecifyMenuLoadActivity : ProjectActivity {
-    override suspend fun execute(project: Project) {
+internal class SpecifyMenuLoadActivity : StartupActivity {
+    fun execute(project: Project) {
         if (ExperimentalUI.isNewUI()) {
             val actionManager = ActionManager.getInstance() as ActionManagerImpl
             val group = actionManager.getAction("MainToolbarRight")
@@ -23,5 +23,8 @@ internal class SpecifyMenuLoadActivity : ProjectActivity {
                 }
             }
         }
+    }
+    override fun runActivity(project: Project) {
+        this.execute(project)
     }
 }
