@@ -16,6 +16,7 @@ internal class SpecifyMenuLoadActivity : ProjectActivity {
             val group = actionManager.getAction("MainToolbarRight")
             // val action = actionManager.getAction("rebel.toolbar.runner.group")
             // val action = JXRComboBoxAction("Select Rebel Agents")
+
             val action = actionManager.getAction("rebel.menu.run.group")
             if (group is DefaultActionGroup && action != null) {
                 if (!group.containsAction(action)) {
